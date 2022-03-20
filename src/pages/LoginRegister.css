@@ -1,0 +1,15 @@
+.LoginRegister {
+    height: 100vh;
+    background: url('../assets/bglogin.jpg') no-repeat center;
+    background-size: cover;
+}
+.LoginRegister__Container {
+    height: 100vh;
+}
+.LoginRegister__Logo {
+    background: url('../assets/logo.jpg') no-repeat center;
+    width: 261px;
+    height: 62px;
+    display: inline-block;
+    margin: 1.5rem auto;
+}

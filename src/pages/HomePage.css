@@ -1,0 +1,15 @@
+.Welcome {
+    height: 100vh;
+    background: url('../assets/bghome.jpg') no-repeat center;
+    background-size: cover;
+}
+.Welcome__Logo {
+    background: url('../assets/logo.jpg') no-repeat center;
+    width: 261px;
+    height: 62px;
+    display: inline-block;
+    margin: 1.5rem auto;
+}
+.Welcome__btn {
+    text-decoration: none;
+}
