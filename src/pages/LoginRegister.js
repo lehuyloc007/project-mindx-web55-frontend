@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Container, Box, Grid, Tabs, Tab,Typography, TextField, Button } from "@mui/material";
+import { Container, Box, Grid, Tabs, Tab, TextField, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import http from "../ultis/axios"
 import "./LoginRegister.css";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -16,13 +16,12 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 2 }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
   );
 }
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
@@ -37,10 +36,30 @@ function a11yProps(index) {
 
 const LoginRegister = () => {
   const [value, setValue] = useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const [valesInput, setValuesInput] = useState({
+    email: "",
+    password: "",
+    displayName: "",
+    confimPassword: "",
+    emailLogin: "",
+    passwordLogin: ""
+  })
+  const handleChangeValuesInput = (event) => {
+    setValuesInput((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value
+      }
+    })
+  }
+  const handelSubmitLogin = (event) => {
+    event.preventDefault();
+    http.post('/auth/login');
+  }
 
   return (
     <div className="LoginRegister">
@@ -70,23 +89,26 @@ const LoginRegister = () => {
               </Box>
               <TabPanel value={value} index={0}>
                 <Box component="form" fullWidth>
-                  <TextField id="outlined-basic" type="email" label="Email" fullWidth sx={{ my: 1 }} variant="outlined" />
-                  <TextField id="outlined-basic" type="text" label="Họ và Tên" fullWidth sx={{ my: 1 }} variant="outlined" />
-                  <TextField id="outlined-basic" type="password" label="Mật khẩu" fullWidth sx={{ my: 1 }} variant="outlined" />
-                  <TextField id="outlined-basic" type="password" label="Xác nhận mật khẩu" fullWidth sx={{ my: 1 }} variant="outlined" />
-                  <Button variant="contained" sx={{my: 2}} fullWidth>Đăng ký</Button>
+                  <TextField onChange={handleChangeValuesInput} name="email" defaultValue={valesInput.email} type="email" label="Email" fullWidth sx={{ my: 1 }} variant="outlined" />
+                  <TextField onChange={handleChangeValuesInput} name="displayName" defaultValue={valesInput.displayName} type="text" label="Họ và Tên" fullWidth sx={{ my: 1 }} variant="outlined" />
+                  <TextField onChange={handleChangeValuesInput} name="password" defaultValue={valesInput.password} type="password" label="Mật khẩu" fullWidth sx={{ my: 1 }} variant="outlined" />
+                  <TextField onChange={handleChangeValuesInput} name="confimPassword" defaultValue={valesInput.confimPassword} type="password" label="Xác nhận mật khẩu" fullWidth sx={{ my: 1 }} variant="outlined" />
+                  <Button variant="contained" sx={{ my: 2 }} fullWidth>Đăng ký</Button>
                 </Box>
               </TabPanel>
-              <TabPanel value={value} index={1}>
-                <TextField id="outlined-basic" type="email" label="Email" fullWidth sx={{ my: 1 }} variant="outlined" />
-                <TextField id="outlined-basic" type="password" label="Mật khẩu" fullWidth sx={{ my: 1 }} variant="outlined" />
-                <Button variant="contained" sx={{my: 2}} fullWidth>Đăng nhập</Button>
+              <TabPanel value={value} index={1} onSubmit={handelSubmitLogin}>
+                <Box component="form" fullWidth>
+                  <TextField onChange={handleChangeValuesInput} name="emailLogin" defaultValue={valesInput.emailLogin} type="email" label="Email" fullWidth sx={{ my: 1 }} variant="outlined" />
+                  <TextField onChange={handleChangeValuesInput} name="passwordLogin" defaultValue={valesInput.passwordLogin} type="password" label="Mật khẩu" fullWidth sx={{ my: 1 }} variant="outlined" />
+                  <Button variant="contained" type="submit" sx={{ my: 2 }} fullWidth>Đăng nhập</Button>
+                </Box>
               </TabPanel>
+
             </Box>
           </Grid>
         </Grid>
       </Container>
-    </div>
+    </div >
   );
 };
 export default LoginRegister;
