@@ -108,8 +108,8 @@ const LoginRegister = () => {
                   <Button variant="contained" sx={{ my: 2 }} fullWidth>Đăng ký</Button>
                 </Box>
               </TabPanel>
-              <TabPanel value={value} index={1} onSubmit={handelSubmitLogin}>
-                <Box component="form" fullWidth>
+              <TabPanel value={value} index={1}>
+                <Box component="form" fullWidth onSubmit={handelSubmitLogin}>
                   <TextField onChange={handleChangeValuesInput} name="emailLogin" defaultValue={valuesInput.emailLogin} type="email" label="Email" fullWidth sx={{ my: 1 }} variant="outlined" />
                   <TextField onChange={handleChangeValuesInput} name="passwordLogin" defaultValue={valuesInput.passwordLogin} type="password" label="Mật khẩu" fullWidth sx={{ my: 1 }} variant="outlined" />
                   <Button variant="contained" type="submit" sx={{ my: 2 }} fullWidth>Đăng nhập</Button>

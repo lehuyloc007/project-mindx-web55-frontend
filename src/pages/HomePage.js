@@ -13,9 +13,7 @@ const HomePage = () => {
         <div>
             {
                 authCxt.user ?
-                (<div>
-                    <Navbar />
-                </div>) : 
+                (<Navbar />) : 
                 (<Box className="Welcome" sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                     <NavLink className="Welcome__Logo" to="/" ></NavLink>
                     <Typography variant="h2" color="white" sx={{ my: 2 }}>Tìm nguồn cảm hứng của bạn</Typography>
